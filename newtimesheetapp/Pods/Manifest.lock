@@ -1,0 +1,28 @@
+PODS:
+  - Alamofire (4.8.2)
+  - FSCalendar (2.8.0)
+  - SwiftyJSON (4.3.0)
+  - Toast-Swift (3.0.1)
+
+DEPENDENCIES:
+  - Alamofire
+  - FSCalendar
+  - SwiftyJSON (~> 4)
+  - Toast-Swift (~> 3)
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - Alamofire
+    - FSCalendar
+    - SwiftyJSON
+    - Toast-Swift
+
+SPEC CHECKSUMS:
+  Alamofire: ae5c501addb7afdbb13687d7f2f722c78734c2d3
+  FSCalendar: 3a5ed3636e2ba1b83ebebfcf0c2603105a6f5efe
+  SwiftyJSON: 6faa0040f8b59dead0ee07436cbf76b73c08fd08
+  Toast-Swift: ba0b01b095aada709d915f9beb1d38184a2721c3
+
+PODFILE CHECKSUM: 84d5b929542896dcb773b93a796424d2dc6a4404
+
+COCOAPODS: 1.6.1

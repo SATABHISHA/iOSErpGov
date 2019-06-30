@@ -1,0 +1,25 @@
+# Uncomment the next line to define a global platform for your project
+ platform :ios, '9.0'
+
+target 'newtimesheetapp' do
+  # Comment the next line if you don't want to use dynamic frameworks
+  use_frameworks!
+  pod 'Alamofire'
+  pod 'SwiftyJSON', '~> 4'
+#  pod 'KRProgressHUD'
+#  pod 'ReachabilitySwift', '~> 4.1'
+  pod 'Toast-Swift', '~> 3'
+pod 'FSCalendar'
+  # Pods for newtimesheetapp
+
+  target 'newtimesheetappTests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
+
+  target 'newtimesheetappUITests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
+
+end
