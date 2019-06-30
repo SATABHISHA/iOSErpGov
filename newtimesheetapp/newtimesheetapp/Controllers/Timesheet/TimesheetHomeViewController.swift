@@ -64,7 +64,7 @@ extension TimesheetHomeViewController: XMLParserDelegate, NSURLConnectionDelegat
     func weekDatesAPICall() {
         
 //        KRProgressHUD.show(withMessage: "Loading...")
-        let text = String(format: "<?xml version='1.0' encoding='utf-8'?><soap12:Envelope xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xmlns:xsd='http://www.w3.org/2001/XMLSchema' xmlns:soap12='http://www.w3.org/2003/05/soap-envelope'><soap12:Body><GenerateWeekDates xmlns='%@/'><CorpId>%@</CorpId><UserId>%@</UserId><UserType>%@</UserType><StartDate>01-01-2015</StartDate><EndDate>12-31-2020</EndDate><CompanyId>1</CompanyId></GenerateWeekDates></soap12:Body></soap12:Envelope>",BASE_URL, String(describing:String(UserSingletonModel.sharedInstance.CorpID)),String(describing:String(UserSingletonModel.sharedInstance.UserID)),String(describing:String(UserSingletonModel.sharedInstance.UserType)))
+        let text = String(format: "<?xml version='1.0' encoding='utf-8'?><soap12:Envelope xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xmlns:xsd='http://www.w3.org/2001/XMLSchema' xmlns:soap12='http://www.w3.org/2003/05/soap-envelope'><soap12:Body><GenerateWeekDates xmlns='%@/'><CorpId>%@</CorpId><UserId>%@</UserId><UserType>%@</UserType><StartDate>05-01-2019</StartDate><EndDate>07-31-2020</EndDate><CompanyId>1</CompanyId></GenerateWeekDates></soap12:Body></soap12:Envelope>",BASE_URL, String(describing:String(UserSingletonModel.sharedInstance.CorpID)),String(describing:String(UserSingletonModel.sharedInstance.UserID)),String(describing:String(UserSingletonModel.sharedInstance.UserType)))
         
         var soapMessage = text
         let url = NSURL(string: "\(BASE_URL)/TimesheetService.asmx?op=GenerateWeekDates")
