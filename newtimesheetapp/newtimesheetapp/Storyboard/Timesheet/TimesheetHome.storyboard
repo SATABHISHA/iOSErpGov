@@ -338,6 +338,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="calender" destination="JZ2-Lg-6gC" id="zTZ-Yy-7n3"/>
                         <outlet property="imgApproved" destination="jAS-bv-nvz" id="cU8-YX-sX0"/>
                         <outlet property="imgNotStarted" destination="Jvh-go-O6I" id="sj9-RN-Lgy"/>
                         <outlet property="imgPartiallyApproved" destination="DzM-Ix-YL8" id="HTm-U9-jMo"/>
