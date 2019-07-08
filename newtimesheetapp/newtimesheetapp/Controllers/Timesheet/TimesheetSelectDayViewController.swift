@@ -9,6 +9,15 @@
 import UIKit
 import SwiftyJSON
 
+
+struct cellData{
+    var WeekDate:String!
+    var ColorCode:String!
+    var TotalHours:Int!
+    var StatusDescription:String!
+    var DayStatus:Int!
+    var DayHrs = [[String:AnyObject]]()
+}
 class TimesheetSelectDayViewController: UIViewController,UITableViewDataSource, UITableViewDelegate, TimesheetSelectDayChildTableViewCellDelegate {
    
     
@@ -20,7 +29,7 @@ class TimesheetSelectDayViewController: UIViewController,UITableViewDataSource, 
     var arrRes = [[String:AnyObject]]()
     var arrResChild = [[String:AnyObject]]()
     var dict:JSON!
-    
+    var tableViewData = [cellData]()
   
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -68,12 +77,14 @@ class TimesheetSelectDayViewController: UIViewController,UITableViewDataSource, 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if tableView.tag == 100
         {
-        return arrRes.count
+//        return arrRes.count
+            return tableViewData.count
         }
         else{
             parentTableview.estimatedRowHeight = CGFloat((60 * arrResChild.count)+70)
             parentTableview.rowHeight = CGFloat((60 * arrResChild.count)+70)
-        return arrResChild.count
+//        return arrResChild.count
+          return  tableViewData[section].DayHrs.count
         }
     }
     
@@ -81,20 +92,19 @@ class TimesheetSelectDayViewController: UIViewController,UITableViewDataSource, 
         if tableView.tag == 100{
         let cell = tableView.dequeueReusableCell(withIdentifier: "titlecell") as! TimesheetSelectDayTableViewCell
         
-        /*var dict = arrRes[indexPath.row]
-        cell.view_goal.layer.cornerRadius = 10.0
-        cell.label_goal.text = dict["goal"] as? String
-        cell.label_value_of_rating.text = "\(dict["valueOfTheRating"]!)"
-        cell.label_date.text = "\(dict["created_at"]!)"*/
-            var dict = arrRes[indexPath.row]
+          /*  var dict = arrRes[indexPath.row]
             cell.tvTitleWeekDate.text = dict["WeekDate"] as? String
-            cell.tvTitleWeekDateHours.text = String(Double(dict["TotalHours"] as! Int))
+            cell.tvTitleWeekDateHours.text = String(Double(dict["TotalHours"] as! Int)) */
+            
+            let dict = tableViewData[indexPath.row]
+            cell.tvTitleWeekDate.text = dict.WeekDate
+            cell.tvTitleWeekDateHours.text = String(Double(dict.TotalHours))
             
             
         return cell
         }else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "titleChildCell") as! TimesheetSelectDayChildTableViewCell
-            var dict = arrResChild[indexPath.row]
+          /*  var dict = arrResChild[indexPath.row]
             cell.delegate = self
             cell.tvWeekDayName.text = dict["DayName"] as? String
             cell.tvWeekDayHours.text = String(Double(dict["Hours"] as! Int))
@@ -104,7 +114,12 @@ class TimesheetSelectDayViewController: UIViewController,UITableViewDataSource, 
                 cell.imgViewAddOrView.image = UIImage(named: "viewbtn.png")
             }else{
                 cell.imgViewAddOrView.image = UIImage(named: "addbtn.png")
-            }
+            }*/
+            var dict = tableViewData[indexPath.section].DayHrs[indexPath.row]
+            cell.delegate = self
+            cell.tvWeekDayName.text = dict["DayName"] as? String
+            cell.tvWeekDayHours.text = String(Double(dict["Hours"] as! Int))
+            cell.tvWeekDayDate.text = dict["DayDate"] as? String
             return cell
         }
     }
@@ -294,6 +309,7 @@ extension TimesheetSelectDayViewController: XMLParserDelegate, NSURLConnectionDe
                 if let dataFromString = string.data(using: String.Encoding.utf8, allowLossyConversion: false) {
                     do{
                     let response = try JSON(data: dataFromString)
+                          print("jsontestEmployee--->",response)
                     let status = response["status"].stringValue
                         if (status == "true"){
                             print("result--->","success")
@@ -301,13 +317,31 @@ extension TimesheetSelectDayViewController: XMLParserDelegate, NSURLConnectionDe
                             if let resData = response["DayWiseTimeSheet"][0]["WeekDays"].arrayObject{
                                 arrRes = resData as! [[String:AnyObject]]
                             }
-                            print("jsontestEmployee--->",arrRes)
+//                            print("jsontestEmployee--->",arrRes)
                             for index in 0...self.arrRes.count{
                                 if let resData = response["DayWiseTimeSheet"][0]["WeekDays"][index]["DayHrs"].arrayObject{
                                     arrResChild = resData as! [[String:AnyObject]]
                                 }
 //                                print("jsontestEmployee--->",arrResChild)
                             }
+                            //-----------------newly added(8th july)------------
+                            for inneritem in response["DayWiseTimeSheet"][0]["WeekDays"].arrayValue{
+                                var k = cellData()
+                                k.WeekDate = inneritem["WeekDate"].stringValue
+                                k.ColorCode = inneritem["ColorCode"].stringValue
+                                k.TotalHours = inneritem["TotalHours"].intValue
+                                print("count->\(inneritem.indices)->",inneritem.count)
+                              // tableViewData.append(k)
+                                    if let resData = response["DayWiseTimeSheet"][0]["WeekDays"][2]["DayHrs"].arrayObject{
+                                        k.DayHrs = resData as! [[String:AnyObject]]
+                                      
+                                    }
+                                   
+                                 tableViewData.append(k)
+                                
+                            }
+                            print("tableData jsontest--->",tableViewData)
+                             //-----------------newly added(8th july),ends------------
                        
                             if self.arrRes.count>0{
                                 self.parentTableview.reloadData()
