@@ -18,6 +18,7 @@ class LoginController: UIViewController {
     @IBOutlet weak var corpId: UITextField!
     @IBOutlet weak var userName: UITextField!
     @IBOutlet weak var password: UITextField!
+    @IBOutlet weak var btnCheckBox: UIButton!
     
     var loginResult = false
     var mutableData = NSMutableData()
@@ -26,8 +27,28 @@ class LoginController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        btnCheckBox.setImage(UIImage(named:"check_box_empty"), for: .normal)
+        btnCheckBox.setImage(UIImage(named:"check_box"), for: .selected)
     }
     
+    @IBAction func checkMarkedTapped(_ sender: UIButton) {
+        UIView.animate(withDuration: 0.5, delay: 0.1, options: .curveLinear, animations: {
+            sender.transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
+        }) { (success) in
+            UIView.animate(withDuration: 0.5, delay: 0.1, options: .curveLinear, animations: {
+                if(!sender.isSelected){
+                sender.isSelected = true
+                sender.transform = .identity
+                print("checked")
+                }else{
+                    sender.isSelected = false
+                    sender.transform = .identity
+                    print("Un checked")
+                }
+            }, completion: nil)
+        }
+        
+    }
     
     @IBAction func btnLogin(_ sender: Any) {
         self.Validate()
