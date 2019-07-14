@@ -1,0 +1,40 @@
+PODS:
+  - Alamofire (4.8.2)
+  - FSCalendar (2.8.0)
+  - KRActivityIndicatorView (3.0.2)
+  - KRProgressHUD (3.4.1):
+    - KRActivityIndicatorView (= 3.0.2)
+  - ReachabilitySwift (4.0.0)
+  - SwiftyJSON (4.0.0)
+  - Toast-Swift (4.0.1)
+
+DEPENDENCIES:
+  - Alamofire
+  - FSCalendar
+  - KRProgressHUD
+  - ReachabilitySwift (~> 4.0.0)
+  - SwiftyJSON (~> 4.0.0)
+  - Toast-Swift (~> 4.0.0)
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - Alamofire
+    - FSCalendar
+    - KRActivityIndicatorView
+    - KRProgressHUD
+    - ReachabilitySwift
+    - SwiftyJSON
+    - Toast-Swift
+
+SPEC CHECKSUMS:
+  Alamofire: ae5c501addb7afdbb13687d7f2f722c78734c2d3
+  FSCalendar: 3a5ed3636e2ba1b83ebebfcf0c2603105a6f5efe
+  KRActivityIndicatorView: a2022d5d3e366207d2690f6bcc550f83aa91241b
+  KRProgressHUD: 115363b48feb530ab1f36c4146ed22e779e0f5aa
+  ReachabilitySwift: e67b2cab4d5386053673d8a7421b5981e5f08259
+  SwiftyJSON: 070dabdcb1beb81b247c65ffa3a79dbbfb3b48aa
+  Toast-Swift: e42a638589a2f95036b4bb7626cfbdde7daf0393
+
+PODFILE CHECKSUM: 52cce690faa3584c800a3dd9acb4ccc0af55a121
+
+COCOAPODS: 1.6.1
