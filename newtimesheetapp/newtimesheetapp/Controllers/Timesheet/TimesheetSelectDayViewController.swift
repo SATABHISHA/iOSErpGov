@@ -469,7 +469,8 @@ extension TimesheetSelectDayViewController: XMLParserDelegate, NSURLConnectionDe
                                 k.WeekDate = value["WeekDate"].stringValue
                                 k.ColorCode = value["ColorCode"].stringValue
                                 k.TotalHours = value["TotalHours"].intValue
-                              
+                              UserSingletonModel.sharedInstance.colorCode = value["ColorCode"].stringValue
+                                
                                 for (key,value) in response["DayWiseTimeSheet"][0]["WeekDays"][(key as NSString).integerValue]["DayHrs"]{
                                     if value["ActiveYN"].stringValue == "true"{
                                         getData.updateValue(value["DayName"].stringValue as AnyObject, forKey: "DayName")

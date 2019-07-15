@@ -51,5 +51,6 @@ class UserSingletonModel: NSObject {
     var periodEndDate:String!
     var dayDate:String!
     var weekDate:String!
+    var colorCode:String!
 
 }
