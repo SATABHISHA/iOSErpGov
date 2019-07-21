@@ -18,11 +18,42 @@ class HomeController: UIViewController {
     @IBOutlet weak var btnUpcomingEvents: UIButton!
     @IBOutlet weak var btnLeaveBalance: UIButton!
     @IBOutlet weak var btnVacationRequest: UIButton!
-    
+    @IBOutlet weak var navigationDrawer: UIView!
+    @IBOutlet weak var navigationDrawerTrailingEdges: NSLayoutConstraint!
+    @IBOutlet weak var navigationDrawerLeadingEdges: NSLayoutConstraint!
+    @IBOutlet weak var navBar: UINavigationItem!
     var mutableData = NSMutableData()
+    var menuIsMenuShow = false
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navBar.accessibilityFrame = CGRect(x: 0, y: 0, width: Int(view.frame.size.width), height: Int(view.frame.size.height))
+        navigationDrawerLeadingEdges.constant = -(navigationDrawer.frame.size.width)
+        navigationDrawerTrailingEdges.constant = view.frame.size.width
         getStatusColor() //---to get color status
+    }
+    
+    
+    @IBAction func btnMenu(_ sender: Any) {
+        menuShow()
+    }
+    
+    func menuShow(){
+        if menuIsMenuShow{
+            self.canelBlurEffect()
+//            self.view.removeFromSuperview()
+            navigationDrawerLeadingEdges.constant = -(navigationDrawer.frame.size.width)
+            navigationDrawerTrailingEdges.constant = view.frame.size.width
+            UIView.animate(withDuration: 0.3, animations: {
+                self.view.layoutIfNeeded()
+            })
+        }else{
+            blurEffect()
+            self.view.addSubview(navigationDrawer)
+            navigationDrawerLeadingEdges.constant = 0
+            navigationDrawerTrailingEdges.constant = 113
+            UIView.animate(withDuration: 0.3, animations: {self.view.layoutIfNeeded()})
+        }
+        menuIsMenuShow = !menuIsMenuShow
     }
     
     @IBAction func btnOnClick(_ sender: UIButton) {
@@ -65,15 +96,24 @@ class HomeController: UIViewController {
     @IBOutlet weak var FormViewChildPayableOperator: UIView!
     func openTimesheetSelectionPopup(){
         blurEffect()
+        
         self.view.addSubview(FormViewChooseTimesheetPopup)
         let screenSize = UIScreen.main.bounds
         let screenWidth = screenSize.height
-        FormViewChooseTimesheetPopup.transform = CGAffineTransform.init(scaleX: 1.3,y :1.3)
+//        FormViewChooseTimesheetPopup.translatesAutoresizingMaskIntoConstraints = false
+        
+      /*  view.addConstraint(NSLayoutConstraint(item: FormViewChooseTimesheetPopup, attribute: .trailing, relatedBy: .equal, toItem: view, attribute: .trailing, multiplier: 1, constant: 30))
+        view.addConstraint(NSLayoutConstraint(item: FormViewChooseTimesheetPopup, attribute: .leading, relatedBy: .equal, toItem: view, attribute: .leading, multiplier: 1, constant: 30))*/
+        
+        
+        FormViewChooseTimesheetPopup.transform = CGAffineTransform.init(scaleX: 0.75,y :1.3)
+       /* FormViewChooseTimesheetPopup.frame = CGRect(x: 0, y: 0, width: FormViewChooseTimesheetPopup.intrinsicContentSize.width-20, height: FormViewChooseTimesheetPopup.intrinsicContentSize.height)*/
+        
         FormViewChooseTimesheetPopup.center = self.view.center
         FormViewChooseTimesheetPopup.layer.cornerRadius = 10.0
         //        addGoalChildFormView.layer.cornerRadius = 10.0
         FormViewChooseTimesheetPopup.alpha = 0
-        FormViewChooseTimesheetPopup.sizeToFit()
+//        FormViewChooseTimesheetPopup.sizeToFit()
         
         UIView.animate(withDuration: 0.3){
             self.FormViewChooseTimesheetPopup.alpha = 1
