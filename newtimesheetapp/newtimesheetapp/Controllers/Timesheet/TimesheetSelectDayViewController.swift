@@ -65,9 +65,12 @@ class TimesheetSelectDayViewController: UIViewController,UITableViewDataSource, 
         tvPeriodDate.isEditable = false
         tvTotalhrs.isEditable = false
         //------making textview editing mode false, code ends----
-        
-        viewbtnEmployeeNote.roundCorners([.topLeft, .bottomLeft], radius: 20)
         viewbtnSupervisorNote.roundCorners([.topRight, .bottomRight], radius: 20)
+        viewbtnEmployeeNote.roundCorners([.topLeft, .bottomLeft], radius: 20)
+       
+        
+       
+        
         customViewButton()
         self.loadDataOfDayWiseTimesheet(stringCheck: "GetDaywiseTimesheet")
         parentTableview.reloadData()
